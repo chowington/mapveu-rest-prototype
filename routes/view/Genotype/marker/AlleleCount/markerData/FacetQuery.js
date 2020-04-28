@@ -1,3 +1,24 @@
+/**
+ * @swagger
+ * 
+ * /view/Genotype/marker/AlleleCount/markerData:
+ *   get:
+ *     parameters:
+ *       - name: geoField
+ *         in: query
+ *         schema:
+ *           type: string
+ *       - name: catField
+ *         in: query
+ *         schema:
+ *           type: string
+ *       - $ref: '#/components/parameters/debugParam'
+ *       - $ref: '#/components/parameters/queryParam'
+ *     responses:
+ *       '200':
+ *         description: OK
+ */
+
 const { ViewQuery } = require('../../../ViewQuery.js');
 const { PointMarker } = require.main.require('./lib/helpers/Marker/PointMarker.js');
 

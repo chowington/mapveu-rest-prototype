@@ -1,3 +1,20 @@
+/**
+ * @swagger
+ * 
+ * components:
+ *   parameters:
+ *     debugParam:
+ *       name: debug
+ *       in: query
+ *       schema:
+ *         type: boolean
+ *     queryParam:
+ *       name: query
+ *       in: query
+ *       schema:
+ *         type: string
+ */
+
 class SolrQuery {
   constructor(solr, query) {
     this.solr = solr;

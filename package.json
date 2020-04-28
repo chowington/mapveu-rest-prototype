@@ -11,6 +11,8 @@
   "dependencies": {
     "restify": "^8.5.1",
     "solr-node": "^1.2.1",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-restify": "^3.0.8",
     "walkdir": "^0.4.1"
   }
 }

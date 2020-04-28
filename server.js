@@ -2,6 +2,8 @@ const restify = require('restify');
 const walk = require('walkdir');
 const SolrNode = require('solr-node');
 const path = require('path');
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-restify');
 
 // Solr connection
 var solr = new SolrNode({
@@ -27,6 +29,30 @@ paths.filter(jspath => /handler.js$/.test(jspath))
     // and pass that through to the route handler setter
     route(routepath, server, solr);
   });
+
+// swagger-jsdoc options
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'MapVEu Data API',
+      version: '0.1',
+    },
+  },
+  // Path to the API docs
+  apis: ['./routes/**/*.js'],
+};
+
+// Initialize swagger-jsdoc -> returns validated swagger (OpenAPI) spec in json format
+const swaggerSpec = swaggerJSDoc(options);
+console.log(swaggerSpec);
+
+// Serve Swagger page
+server.get('/api-docs', swaggerUi.setup(swaggerSpec));
+server.get('/swagger-ui-init.js', ...swaggerUi.serve);
+server.get('/swagger-ui.css', ...swaggerUi.serve);
+server.get('/swagger-ui-bundle.js', ...swaggerUi.serve);
+server.get('/swagger-ui-standalone-preset.js', ...swaggerUi.serve);
 
 console.log(server.toString());
 server.listen(8081);

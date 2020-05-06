@@ -45,14 +45,11 @@ const options = {
 
 // Initialize swagger-jsdoc -> returns validated swagger (OpenAPI) spec in json format
 const swaggerSpec = swaggerJSDoc(options);
-console.log(swaggerSpec);
 
 // Serve Swagger page
-server.get('/api-docs', swaggerUi.setup(swaggerSpec));
-server.get('/swagger-ui-init.js', ...swaggerUi.serve);
-server.get('/swagger-ui.css', ...swaggerUi.serve);
-server.get('/swagger-ui-bundle.js', ...swaggerUi.serve);
-server.get('/swagger-ui-standalone-preset.js', ...swaggerUi.serve);
+let docPath = '/api-docs';
+server.get(docPath, swaggerUi.setup(swaggerSpec, {baseURL: docPath}));
+server.get(docPath + '/*', ...swaggerUi.serve);
 
 console.log(server.toString());
 server.listen(8081);
